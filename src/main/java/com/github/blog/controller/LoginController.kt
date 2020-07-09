@@ -2,6 +2,7 @@ package com.github.blog.controller
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.github.blog.annotation.UseAdvice
+import com.github.blog.dto.LoginDto
 import com.github.blog.service.UserService
 import com.github.blog.utils.createJWT
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,11 +19,11 @@ class LoginController {
     lateinit var userService: UserService
 
     @PostMapping("/login")
-    fun login(@RequestBody node: JsonNode): String {
+    fun login(@RequestBody node: JsonNode): LoginDto {
         val name = node["name"].asText()
         val password = node["password"].asText()
         val user = userService.verify(name, password)
-        return createJWT(user)
+        return LoginDto(createJWT(user))
     }
 
     @PostMapping("/testlogin")

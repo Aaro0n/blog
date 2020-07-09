@@ -1,6 +1,6 @@
-package com.prktice.eureka.interceptors
+package com.github.blog.interceptors
 
-import com.prktice.eureka.Result2
+import com.github.blog.utils.Result2
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
