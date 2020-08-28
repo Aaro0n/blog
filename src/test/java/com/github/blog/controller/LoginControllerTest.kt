@@ -23,4 +23,6 @@ internal class LoginControllerTest {
         objectNode.put("password", "449a36b6689d841d7d27f31b4b7cc73a")
         println(loginController.login(objectNode))
     }
+
+
 }
