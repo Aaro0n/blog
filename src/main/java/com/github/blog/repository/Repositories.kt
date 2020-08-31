@@ -24,4 +24,8 @@ interface UserRepository : CrudRepository<User, Long> {
     fun findUserById(id: Long): User?
 }
 
-interface VisitRecordRepository : CrudRepository<VisitRecord, Long>
+interface VisitRecordRepository : CrudRepository<VisitRecord, Long> {
+
+    @Query("select count (distinct a.ipAddress) from VisitRecord a where a.articleId=?1")
+    fun getVisitTimesByArticleId(articleId: Long): Long
+}
