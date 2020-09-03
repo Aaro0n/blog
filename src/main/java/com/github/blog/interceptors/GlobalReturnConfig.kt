@@ -23,6 +23,9 @@ class GlobalReturnConfig {
             returnType.containingClass.annotations.forEach {
                 if (it.annotationClass == UseAdvice::class) return true
             }
+            returnType.method?.annotations?.forEach {
+                if (it.annotationClass == UseAdvice::class) return true
+            }
             return false
         }
 
