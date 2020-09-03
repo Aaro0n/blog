@@ -31,7 +31,6 @@ class FileController {
     }
 
     @GetMapping("/file/{filename}", produces = [MediaType.IMAGE_JPEG_VALUE])
-    @ResponseBody
     fun file(@PathVariable filename: String): Resource {
         return storageService.loadAsResource(filename)
     }
