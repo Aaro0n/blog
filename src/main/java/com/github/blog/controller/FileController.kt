@@ -4,6 +4,7 @@ import com.github.blog.annotation.UseAdvice
 import com.github.blog.service.StorageService
 import com.github.blog.service.UserService
 import com.github.blog.utils.DTO
+import com.github.blog.utils.dto
 import com.github.blog.utils.getUserIdFromJWT
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile
 
 
 @RestController
+@CrossOrigin
 class FileController {
 
     @Autowired
@@ -27,7 +29,7 @@ class FileController {
         val userId = getUserIdFromJWT(token)
         userService.findUserById(userId)
         storageService.store(file)
-        return "/file/${file.originalFilename}".DTO()
+        return "/file/${file.originalFilename}".dto()
     }
 
     @GetMapping("/file/{filename}", produces = [MediaType.IMAGE_JPEG_VALUE])

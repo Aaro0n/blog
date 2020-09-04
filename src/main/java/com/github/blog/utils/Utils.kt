@@ -24,7 +24,7 @@ fun Long.ipToString(): String {
 
 data class DTO(val data: String)
 
-fun String.DTO(): DTO {
+fun String.dto(): DTO {
     return DTO(this)
 }
 
