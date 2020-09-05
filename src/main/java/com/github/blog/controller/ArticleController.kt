@@ -33,6 +33,10 @@ class ArticleController {
     fun createArticle(@RequestHeader("token") token: String, @RequestBody article: Article) {
         val userId = getUserIdFromJWT(token)
         article.user = userService.findUserById(userId)
+        if (article.id == null) {
+            article.updateTime = System.currentTimeMillis()
+        }
+        article.updateTime = System.currentTimeMillis()
         articleService.saveArticle(article)
     }
 

@@ -7,8 +7,8 @@ data class Article(
         @Id
         @GeneratedValue
         var id: Long? = null,
-        val createTime: Long, //创建时间
-        val updateTime: Long, //更新时间
+        var createTime: Long, //创建时间
+        var updateTime: Long, //更新时间
         val title: String,
         @Lob
         @Basic(fetch = FetchType.LAZY)
