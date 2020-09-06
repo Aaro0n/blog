@@ -37,6 +37,7 @@ class ArticleController {
             article.updateTime = System.currentTimeMillis()
         }
         article.updateTime = System.currentTimeMillis()
+        article.title = article.title.replace("#", "").trim()
         articleService.saveArticle(article)
     }
 
