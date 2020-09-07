@@ -20,3 +20,7 @@ fun getUserIdFromJWT(jws: String): Long {
     val idStr = claims["id"] as String
     return idStr.toLong()
 }
+
+fun checkJWT(jws: String) {
+    Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jws)
+}

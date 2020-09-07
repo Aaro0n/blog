@@ -1,11 +1,11 @@
 package com.github.blog.service
 
 import com.github.blog.dto.ArticleDto
-import com.github.blog.dto.admin.ArticleDto as AdminArticle
 import com.github.blog.entity.Article
 import com.github.blog.repository.ArticleRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import com.github.blog.dto.admin.ArticleDto as AdminArticle
 
 @Service
 class ArticleService {
@@ -17,6 +17,8 @@ class ArticleService {
     fun saveArticle(article: Article) {
         articleRepository.save(article)
     }
+
+    fun changeType(id: Long, type: Int) = articleRepository.changeType(id, type)
 
     fun getAllArticle(): List<AdminArticle> {
         val articleList = articleRepository.findAllByOrderByCreateTimeDesc()

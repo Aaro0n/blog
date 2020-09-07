@@ -7,6 +7,7 @@ import com.github.blog.entity.VisitRecord
 import com.github.blog.repository.VisitRecordRepository
 import com.github.blog.service.ArticleService
 import com.github.blog.service.UserService
+import com.github.blog.utils.checkJWT
 import com.github.blog.utils.getUserIdFromJWT
 import com.github.blog.utils.ipToLong
 import org.springframework.beans.factory.annotation.Autowired
@@ -39,6 +40,12 @@ class ArticleController {
         article.updateTime = System.currentTimeMillis()
         article.title = article.title.replace("#", "").trim()
         articleService.saveArticle(article)
+    }
+
+    @PostMapping("/article/{id}")
+    fun changeType(@RequestHeader("token") token: String, @PathVariable("id") id: Long, @RequestParam("type")type: Int) {
+        checkJWT(token)
+        articleService.changeType(id, type)
     }
 
     @GetMapping("/article")
