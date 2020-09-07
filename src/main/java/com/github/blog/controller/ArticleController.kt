@@ -9,10 +9,10 @@ import com.github.blog.service.ArticleService
 import com.github.blog.service.UserService
 import com.github.blog.utils.getUserIdFromJWT
 import com.github.blog.utils.ipToLong
-
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
+import com.github.blog.dto.admin.ArticleDto as AdminArticle
 
 
 @UseAdvice
@@ -42,7 +42,7 @@ class ArticleController {
     }
 
     @GetMapping("/article")
-    fun getAllArticle(): List<Article> {
+    fun getAllArticle(): List<AdminArticle> {
         return articleService.getAllArticle()
     }
 
