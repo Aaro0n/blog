@@ -15,6 +15,11 @@ class ArticleService {
 
 
     fun saveArticle(article: Article) {
+        if (article.id == null) {
+            article.updateTime = System.currentTimeMillis()
+        }
+        article.updateTime = System.currentTimeMillis()
+        article.title = article.title.replace("#", "").trim()
         articleRepository.save(article)
     }
 
