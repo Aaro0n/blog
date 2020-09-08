@@ -31,8 +31,7 @@ class ArticleController {
     @PostMapping("/article")
     fun createArticle(@RequestHeader("token") token: String, @RequestBody article: Article) {
         val userId = getUserIdFromJWT(token)
-        article.user = userService.findUserById(userId)
-        articleService.saveArticle(article)
+        articleService.saveArticle(article, userService.findUserById(userId))
     }
 
     @PostMapping("/article/{id}")

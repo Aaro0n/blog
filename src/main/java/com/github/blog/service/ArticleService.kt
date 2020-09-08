@@ -2,6 +2,7 @@ package com.github.blog.service
 
 import com.github.blog.dto.ArticleDto
 import com.github.blog.entity.Article
+import com.github.blog.entity.User
 import com.github.blog.repository.ArticleRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -13,8 +14,8 @@ class ArticleService {
     @Autowired
     lateinit var articleRepository: ArticleRepository
 
-
-    fun saveArticle(article: Article) {
+    fun saveArticle(article: Article, user: User) {
+        article.user = user
         if (article.id == null) {
             article.updateTime = System.currentTimeMillis()
         }
