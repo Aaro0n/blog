@@ -56,4 +56,10 @@ class ArticleController {
         visitRecordService.save(article.id!!, request.remoteAddr)
         return article
     }
+
+    @DeleteMapping("/article/{id}")
+    fun deleteArticle(@RequestHeader("token") token: String, @PathVariable("id") id: Long) {
+        checkJWT(token)
+        articleService.deleteById(id)
+    }
 }

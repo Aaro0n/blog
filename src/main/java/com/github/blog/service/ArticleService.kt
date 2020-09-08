@@ -45,4 +45,7 @@ class ArticleService {
     fun getAllArticleDto(): List<ArticleDto> = articleRepository.findAllArticle()
 
     fun getArticleById(id: Long): Article = articleRepository.findById(id).get()
+    fun deleteById(id: Long) {
+        articleRepository.deleteById(id)
+    }
 }
