@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 
 interface ArticleRepository : CrudRepository<Article, Long> {
     fun findByTitle(title: String): Article?
-    fun findAllByOrderByCreateTimeDesc(): List<Article>
+    fun findAllByOrderByUpdateTimeDesc(): List<Article>
 
     @Query("select new com.github.blog.dto.ArticleDto(a.id,a.title) from Article a")
     fun findAllArticle(): List<ArticleDto>

@@ -17,7 +17,11 @@ class ArticleService {
     fun saveArticle(article: Article, user: User) {
         article.user = user
         if (article.id == null) {
-            article.updateTime = System.currentTimeMillis()
+            article.createTime = System.currentTimeMillis()
+        } else { //update
+            val savedArticle = articleRepository.findById(article.id!!).get()
+            article.createTime = savedArticle.createTime
+            article.categoryId = article.categoryId
         }
         article.updateTime = System.currentTimeMillis()
         article.title = article.title.replace("#", "").trim()
@@ -27,7 +31,7 @@ class ArticleService {
     fun changeType(id: Long, type: Int) = articleRepository.changeType(id, type)
 
     fun getAllArticle(): List<AdminArticle> {
-        val articleList = articleRepository.findAllByOrderByCreateTimeDesc()
+        val articleList = articleRepository.findAllByOrderByUpdateTimeDesc()
         return articleList.map {
             AdminArticle(it.id!!,
                     it.title,

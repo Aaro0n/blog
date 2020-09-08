@@ -15,7 +15,7 @@ data class Article(
         @Column(name = "content", nullable = true)
         val content: String,
         @ManyToOne var user: User,
-        val categoryId: Long,
+        var categoryId: Long,
 //        type 0发布 1草稿
         val type: Int
 )
