@@ -13,7 +13,7 @@ interface ArticleRepository : CrudRepository<Article, Long> {
     fun findByTitle(title: String): Article?
     fun findAllByOrderByUpdateTimeDesc(): List<Article>
 
-    @Query("select new com.github.blog.dto.ArticleDto(a.id,a.title) from Article a")
+    @Query("select new com.github.blog.dto.ArticleDto(a.id,a.title) from Article a where a.type=0")
     fun findAllArticle(): List<ArticleDto>
 
     @Transactional

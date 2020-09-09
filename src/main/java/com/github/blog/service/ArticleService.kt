@@ -16,7 +16,7 @@ class ArticleService {
 
     fun saveArticle(article: Article, user: User) {
         article.user = user
-        if (article.id == null) {
+        if (article.id == null || article.id == 0L) {
             article.createTime = System.currentTimeMillis()
         } else { //update
             val savedArticle = articleRepository.findById(article.id!!).get()
