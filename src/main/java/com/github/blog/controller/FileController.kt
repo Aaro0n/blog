@@ -29,7 +29,7 @@ class FileController {
         val userId = getUserIdFromJWT(token)
         userService.findUserById(userId)
         storageService.store(file)
-        return "/file/${file.originalFilename}".dto()
+        return "file/${file.originalFilename}".dto()
     }
 
     @GetMapping("/file/{filename}", produces = [MediaType.IMAGE_JPEG_VALUE])
