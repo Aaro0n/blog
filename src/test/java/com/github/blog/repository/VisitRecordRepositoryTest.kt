@@ -13,7 +13,7 @@ class VisitRecordRepositoryTest {
 
     @Test
     fun getVisitTimesByArticleId() {
-        val times = visitRecordRepository.getVisitTimesByArticleId(51)
+        val times = visitRecordRepository.getVisitTimesByArticleId("")
         assert(times == 1L)
     }
 

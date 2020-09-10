@@ -1,13 +1,11 @@
-package com.github.blog;
+package com.github.blog
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class BlogApplicationTests {
-
+internal class BlogApplicationTests {
     @Test
-    void contextLoads() {
+    fun contextLoads() {
     }
-
 }

@@ -1,18 +1,17 @@
-package com.github.blog;
+package com.github.blog
 
-import com.github.blog.configuration.StorageProperties;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.scheduling.annotation.EnableAsync;
+import com.github.blog.configuration.StorageProperties
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.scheduling.annotation.EnableAsync
+
 
 @SpringBootApplication
 @EnableAsync
-@EnableConfigurationProperties(StorageProperties.class)
-public class BlogApplication {
+@EnableConfigurationProperties(value = [StorageProperties::class])
+class BlogApplication
 
-    public static void main(String[] args) {
-        SpringApplication.run(BlogApplication.class, args);
-    }
-
+fun main(args: Array<String>) {
+    SpringApplication.run(BlogApplication::class.java, *args)
 }
