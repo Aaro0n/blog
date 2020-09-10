@@ -12,5 +12,5 @@ data class VisitRecord(
         var id: Long? = null,
         var visitTime: Long,
         var ipAddress: Long,
-        var articleId: Long
+        var articleId: String
 )

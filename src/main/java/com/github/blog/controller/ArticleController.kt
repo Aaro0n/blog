@@ -35,7 +35,7 @@ class ArticleController {
     }
 
     @PostMapping("/article/{id}")
-    fun changeType(@RequestHeader("token") token: String, @PathVariable("id") id: Long, @RequestParam("type") type: Int) {
+    fun changeType(@RequestHeader("token") token: String, @PathVariable("id") id: String, @RequestParam("type") type: Int) {
         checkJWT(token)
         articleService.changeType(id, type)
     }
@@ -51,14 +51,14 @@ class ArticleController {
     }
 
     @GetMapping("/article/{id}")
-    fun getArticle(@PathVariable("id") id: Long, request: HttpServletRequest): Article {
+    fun getArticle(@PathVariable("id") id: String, request: HttpServletRequest): Article {
         val article = articleService.getArticleById(id)
         visitRecordService.save(article.id!!, request.remoteAddr)
         return article
     }
 
     @DeleteMapping("/article/{id}")
-    fun deleteArticle(@RequestHeader("token") token: String, @PathVariable("id") id: Long) {
+    fun deleteArticle(@RequestHeader("token") token: String, @PathVariable("id") id: String) {
         checkJWT(token)
         articleService.deleteById(id)
     }

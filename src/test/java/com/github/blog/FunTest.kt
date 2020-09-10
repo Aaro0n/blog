@@ -22,6 +22,11 @@ class FunTest {
 
 
     @Test
+    fun testSlice(){
+        println("123456789".slice(0..7))
+    }
+
+    @Test
     fun logicalShiftRight(){
         val i = 1
         println(8 ushr i)

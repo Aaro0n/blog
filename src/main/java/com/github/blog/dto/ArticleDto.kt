@@ -1,3 +1,3 @@
 package com.github.blog.dto
 
-data class ArticleDto(val id:Long, val title:String)
+data class ArticleDto(val id:String, val title:String)

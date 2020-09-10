@@ -9,8 +9,10 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.transaction.annotation.Transactional
 
-interface ArticleRepository : CrudRepository<Article, Long> {
+interface ArticleRepository : CrudRepository<Article, String> {
+
     fun findByTitle(title: String): Article?
+
     fun findAllByOrderByUpdateTimeDesc(): List<Article>
 
     @Query("select new com.github.blog.dto.ArticleDto(a.id,a.title) from Article a where a.type=0")
@@ -19,7 +21,7 @@ interface ArticleRepository : CrudRepository<Article, Long> {
     @Transactional
     @Modifying
     @Query("update Article set type=?2 where id=?1")
-    fun changeType(id: Long, type: Int)
+    fun changeType(id: String, type: Int)
 }
 
 interface UserRepository : CrudRepository<User, Long> {
@@ -34,5 +36,5 @@ interface UserRepository : CrudRepository<User, Long> {
 interface VisitRecordRepository : CrudRepository<VisitRecord, Long> {
 
     @Query("select count (distinct a.ipAddress) from VisitRecord a where a.articleId=?1")
-    fun getVisitTimesByArticleId(articleId: Long): Long
+    fun getVisitTimesByArticleId(articleId: String): Long
 }

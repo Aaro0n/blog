@@ -17,7 +17,7 @@ class VisitRecordService {
         visitRecordRepository.save(visitRecord)
     }
 
-    fun save(articleId: Long, remoteAddr: String) {
+    fun save(articleId: String, remoteAddr: String) {
         val visitRecord = VisitRecord(null, System.currentTimeMillis(), remoteAddr.ipToLong(), articleId)
         visitRecordRepository.save(visitRecord)
     }
