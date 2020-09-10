@@ -4,6 +4,7 @@ import com.github.blog.dto.ArticleDto
 import com.github.blog.entity.Article
 import com.github.blog.entity.User
 import com.github.blog.repository.ArticleRepository
+import com.github.blog.utils.checkJWT
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import com.github.blog.dto.admin.ArticleDto as AdminArticle
@@ -44,7 +45,19 @@ class ArticleService {
 
     fun getAllArticleDto(): List<ArticleDto> = articleRepository.findAllArticle()
 
-    fun getArticleById(id: String): Article = articleRepository.findById(id).get()
+    fun getArticleById(token: String?, id: String): Article {
+        val article = articleRepository.findById(id).get()
+        return if (article.type == 1) { //草稿
+            try {
+                checkJWT(token!!)
+            } catch (e: Exception) {
+                throw Exception("permission denied")
+            }
+            article
+        } else {
+            article
+        }
+    }
 
     fun deleteById(id: String) {
         articleRepository.deleteById(id)
