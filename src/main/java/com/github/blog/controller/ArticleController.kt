@@ -51,9 +51,9 @@ class ArticleController {
     }
 
     @GetMapping("/article/{id}")
-    fun getArticle(@RequestHeader("token") token: String?, @PathVariable("id") id: String, request: HttpServletRequest): Article {
+    fun getArticle(@RequestHeader("token") token: String?, @PathVariable("id") id: String, request: HttpServletRequest): ArticleDto {
         val article = articleService.getArticleById(token, id)
-        visitRecordService.save(article.id!!, request.remoteAddr)
+        visitRecordService.save(article.id, request.remoteAddr)
         return article
     }
 

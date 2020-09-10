@@ -1,6 +1,7 @@
 package com.github.blog.service
 
 import com.github.blog.dto.ArticleDto
+import com.github.blog.dto.toDtoWithContent
 import com.github.blog.entity.Article
 import com.github.blog.entity.User
 import com.github.blog.repository.ArticleRepository
@@ -45,7 +46,7 @@ class ArticleService {
 
     fun getAllArticleDto(): List<ArticleDto> = articleRepository.findAllArticle()
 
-    fun getArticleById(token: String?, id: String): Article {
+    fun getArticleById(token: String?, id: String): ArticleDto {
         val article = articleRepository.findById(id).get()
         return if (article.type == 1) { //草稿
             try {
@@ -53,9 +54,9 @@ class ArticleService {
             } catch (e: Exception) {
                 throw Exception("permission denied")
             }
-            article
+            article.toDtoWithContent()
         } else {
-            article
+            article.toDtoWithContent()
         }
     }
 
