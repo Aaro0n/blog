@@ -60,6 +60,15 @@ class ArticleService {
         }
     }
 
+    fun getArticleById(id: String): ArticleDto {
+        val article = articleRepository.findById(id).get()
+        return if (article.type == 1) { //草稿
+            throw Exception("permission denied")
+        } else {
+            article.toDtoWithContent()
+        }
+    }
+
     fun deleteById(id: String) {
         articleRepository.deleteById(id)
     }

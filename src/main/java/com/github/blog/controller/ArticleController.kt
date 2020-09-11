@@ -3,6 +3,7 @@ package com.github.blog.controller
 import com.github.blog.annotation.UseAdvice
 import com.github.blog.dto.ArticleDto
 import com.github.blog.entity.Article
+import com.github.blog.interceptors.RateLimit
 import com.github.blog.service.ArticleService
 import com.github.blog.service.UserService
 import com.github.blog.service.VisitRecordService
@@ -28,38 +29,40 @@ class ArticleController {
     @Autowired
     lateinit var visitRecordService: VisitRecordService
 
-    @PostMapping("/article")
+    @PostMapping("/admin/article")
     fun createArticle(@RequestHeader("token") token: String, @RequestBody article: Article) {
         val userId = getUserIdFromJWT(token)
         articleService.saveArticle(article, userService.findUserById(userId))
     }
 
-    @PostMapping("/article/{id}")
+    @PostMapping("/admin/article/{id}")
     fun changeType(@RequestHeader("token") token: String, @PathVariable("id") id: String, @RequestParam("type") type: Int) {
         checkJWT(token)
         articleService.changeType(id, type)
     }
 
-    @GetMapping("/article")
+    @GetMapping("/admin/article")
     fun getAllArticle(): List<AdminArticle> {
         return articleService.getAllArticle()
     }
 
-    @GetMapping("/articles")
+    @DeleteMapping("/admin/article/{id}")
+    fun deleteArticle(@RequestHeader("token") token: String, @PathVariable("id") id: String) {
+        checkJWT(token)
+        articleService.deleteById(id)
+    }
+
+    @RateLimit
+    @GetMapping("/article")
     fun getArticleList(): List<ArticleDto> {
         return articleService.getAllArticleDto()
     }
 
+    @RateLimit
     @GetMapping("/article/{id}")
-    fun getArticle(@RequestHeader("token") token: String?, @PathVariable("id") id: String, request: HttpServletRequest): ArticleDto {
-        val article = articleService.getArticleById(token, id)
+    fun getArticle(@PathVariable("id") id: String, request: HttpServletRequest): ArticleDto {
+        val article = articleService.getArticleById(id)
         visitRecordService.save(article.id, request.remoteAddr)
         return article
-    }
-
-    @DeleteMapping("/article/{id}")
-    fun deleteArticle(@RequestHeader("token") token: String, @PathVariable("id") id: String) {
-        checkJWT(token)
-        articleService.deleteById(id)
     }
 }
