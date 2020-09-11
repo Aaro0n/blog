@@ -1,5 +1,6 @@
 package com.github.blog.service
 
+import com.fasterxml.jackson.databind.JsonNode
 import com.github.blog.entity.User
 import com.github.blog.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +13,9 @@ class UserService {
     @Autowired
     lateinit var userRepository: UserRepository
 
-    fun verify(name: String, password: String): User {
+    fun verify(node: JsonNode): User {
+        val name = node["name"].asText()
+        val password = node["password"].asText()
         val user = userRepository.findByName(name) ?: throw Exception("没有该账户")
         return if (user.password == password) {
             user
