@@ -42,7 +42,8 @@ class ArticleController {
     }
 
     @GetMapping("/admin/article")
-    fun getAllArticle(): List<AdminArticle> {
+    fun getAllArticle(@RequestHeader("token") token: String): List<AdminArticle> {
+        checkJWT(token)
         return articleService.getAllArticle()
     }
 
