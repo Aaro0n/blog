@@ -5,6 +5,8 @@ import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
 import com.google.common.util.concurrent.RateLimiter
 import org.aspectj.lang.JoinPoint
+import org.aspectj.lang.ProceedingJoinPoint
+import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
@@ -23,7 +25,7 @@ class RateLimiterAspect {
             .expireAfterWrite(1, TimeUnit.DAYS)
             .build<String, RateLimiter>(object : CacheLoader<String, RateLimiter>() {
                 override fun load(key: String): RateLimiter {
-                    return RateLimiter.create(2.0)
+                    return RateLimiter.create(0.5)
                 }
             })
 
@@ -37,6 +39,16 @@ class RateLimiterAspect {
         val limiter = rateLimit.get(ip)
         if (!limiter.tryAcquire()) throw Exception("visiting too frequently")
     }
+
+//    @Around("rateLimiterAspect()")
+//    fun doAround(joinPoint: ProceedingJoinPoint): Any {
+//        val ip = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request.remoteAddr
+//        val limiter = rateLimit.get(ip)
+//        if (!limiter.tryAcquire())
+//            throw Exception("visiting too frequently")
+//        else
+//            return joinPoint.proceed();
+//    }
 }
 
 
