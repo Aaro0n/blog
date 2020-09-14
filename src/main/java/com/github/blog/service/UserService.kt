@@ -31,4 +31,15 @@ class UserService {
     fun findUserById(userId: Long): User {
         return userRepository.findUserById(userId) ?: throw Exception("user not exist")
     }
+
+    fun register(node: JsonNode) {
+        if (userRepository.findAll().count() > 0) {
+            throw Exception("已存在账户，无法注册")
+        } else {
+            val name = node["name"].asText()
+            val password = node["password"].asText()
+            val user = User(password = password, name = name)
+            userRepository.save(user)
+        }
+    }
 }

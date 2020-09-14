@@ -25,4 +25,9 @@ class LoginController {
         val user = userService.verify(node)
         return LoginDto(createJWT(user))
     }
+
+    @PostMapping("/register")
+    fun register(@RequestBody node: JsonNode) {
+        userService.register(node)
+    }
 }
