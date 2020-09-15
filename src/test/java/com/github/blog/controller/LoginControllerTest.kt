@@ -13,7 +13,6 @@ internal class LoginControllerTest {
 
     @Test
     fun login() {
-        loginController.login()
     }
 
     @Test

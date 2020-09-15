@@ -6,14 +6,14 @@ import org.springframework.boot.test.context.SpringBootTest
 
 
 @SpringBootTest
-class VisitRecordRepositoryTest {
+class VisitRepositoryTest {
 
     @Autowired
-    lateinit var visitRecordRepository: VisitRecordRepository
+    lateinit var visitRepository: VisitRepository
 
     @Test
     fun getVisitTimesByArticleId() {
-        val times = visitRecordRepository.getVisitTimesByArticleId("")
+        val times = visitRepository.getVisitTimesByArticleId("")
         assert(times == 1L)
     }
 

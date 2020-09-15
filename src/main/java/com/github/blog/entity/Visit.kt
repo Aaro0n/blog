@@ -6,7 +6,7 @@ import javax.persistence.Id
 
 
 @Entity
-data class VisitRecord(
+data class Visit(
         @Id
         @GeneratedValue
         var id: Long? = null,

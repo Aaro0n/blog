@@ -3,7 +3,7 @@ package com.github.blog.repository
 import com.github.blog.dto.ArticleDto
 import com.github.blog.entity.Article
 import com.github.blog.entity.User
-import com.github.blog.entity.VisitRecord
+import com.github.blog.entity.Visit
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
@@ -33,8 +33,8 @@ interface UserRepository : CrudRepository<User, Long> {
     fun findUserById(id: Long): User?
 }
 
-interface VisitRecordRepository : CrudRepository<VisitRecord, Long> {
+interface VisitRepository : CrudRepository<Visit, Long> {
 
-    @Query("select count (distinct a.ipAddress) from VisitRecord a where a.articleId=?1")
+    @Query("select count (distinct a.ipAddress) from Visit a where a.articleId=?1")
     fun getVisitTimesByArticleId(articleId: String): Long
 }

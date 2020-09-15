@@ -6,7 +6,7 @@ import com.github.blog.entity.Article
 import com.github.blog.interceptors.RateLimit
 import com.github.blog.service.ArticleService
 import com.github.blog.service.UserService
-import com.github.blog.service.VisitRecordService
+import com.github.blog.service.VisitService
 import com.github.blog.utils.checkJWT
 import com.github.blog.utils.getUserIdFromJWT
 import org.springframework.beans.factory.annotation.Autowired
@@ -27,7 +27,7 @@ class ArticleController {
     lateinit var userService: UserService
 
     @Autowired
-    lateinit var visitRecordService: VisitRecordService
+    lateinit var visitService: VisitService
 
     @PostMapping("/admin/article")
     fun createArticle(@RequestHeader("token") token: String, @RequestBody article: Article) {
@@ -63,7 +63,7 @@ class ArticleController {
     @GetMapping("/article/{id}")
     fun getArticle(@PathVariable("id") id: String, request: HttpServletRequest): ArticleDto {
         val article = articleService.getArticleById(id)
-        visitRecordService.save(article.id, request.remoteAddr)
+        visitService.save(article.id, request.remoteAddr)
         return article
     }
 }
