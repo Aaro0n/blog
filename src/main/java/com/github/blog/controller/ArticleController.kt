@@ -47,6 +47,12 @@ class ArticleController {
         return articleService.getAllArticle()
     }
 
+    @GetMapping("/admin/article/search")
+    fun searchArticle(@RequestHeader("token") token: String, @RequestParam("key") key: String): List<AdminArticle> {
+        checkJWT(token)
+        return articleService.searchArticle(key)
+    }
+
     @DeleteMapping("/admin/article/{id}")
     fun deleteArticle(@RequestHeader("token") token: String, @PathVariable("id") id: String) {
         checkJWT(token)

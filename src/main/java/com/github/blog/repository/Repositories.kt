@@ -7,6 +7,7 @@ import com.github.blog.entity.Visit
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.query.Param
 import org.springframework.transaction.annotation.Transactional
 
 interface ArticleRepository : CrudRepository<Article, String> {
@@ -22,6 +23,9 @@ interface ArticleRepository : CrudRepository<Article, String> {
     @Modifying
     @Query("update Article set type=?2 where id=?1")
     fun changeType(id: String, type: Int)
+
+    @Query("select a from Article a where a.content like %:key%")
+    fun searchArticle(@Param("key") key: String): List<Article>
 }
 
 interface UserRepository : CrudRepository<User, Long> {

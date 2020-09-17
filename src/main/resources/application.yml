@@ -12,16 +12,16 @@ spring:
     name: eureka-client-user-service
   datasource:
     # 数据库连接设置
-    url: jdbc:h2:mem:iushr
-    username: root
-    password: root
-    driver-class-name: org.h2.Driver
-    platform: h2
+#    url: jdbc:h2:mem:iushr
+    #    username: root
+    #    password: root
+    #    driver-class-name: org.h2.Driver
+    #    platform: h2
 
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://127.0.0.1:3306/iushr?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
-#      username: root
-#      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/iushr?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
   jpa:
     hibernate:
       ddl-auto: update
@@ -34,9 +34,9 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
-  h2:
-    console:
-      settings:
-        web-allow-others: true
-      path: /admin/h2
-      enabled: true
+#  h2:
+#    console:
+#      settings:
+#        web-allow-others: true
+#      path: /admin/h2
+#      enabled: true

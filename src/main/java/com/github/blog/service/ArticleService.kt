@@ -72,4 +72,14 @@ class ArticleService {
     fun deleteById(id: String) {
         articleRepository.deleteById(id)
     }
+
+    fun searchArticle(key: String): List<AdminArticle> {
+        return articleRepository.searchArticle(key).map {
+            AdminArticle(it.id!!,
+                    it.title,
+                    it.content,
+                    it.updateTime,
+                    it.type)
+        }
+    }
 }
